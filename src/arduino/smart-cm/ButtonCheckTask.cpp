@@ -1,16 +1,17 @@
 #include "ButtonCheckTask.h"
 
-ButtonCheckTask::ButtonCheckTask(int pin){
-  this->pin = pin;    
+ButtonCheckTask::ButtonCheckTask(int pin, Mode mode){
+  this->pin = pin;  
+  this->mode = mode;  
 }
-  
+
 void ButtonCheckTask::init(int period){
   Task::init(period);
-  button = new Button(pin);  
+  this->button = new Button(pin);  
 }
-  
-void BlinkTask::tick(){
+
+void ButtonCheckTask::tick(){
   if(button->isPressed){
-   
+    radar->setMode(this->mode);
   }
 }

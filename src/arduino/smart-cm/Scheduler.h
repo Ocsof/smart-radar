@@ -4,10 +4,10 @@
 #include "Timer.h"
 #include "Task.h"
 
-#define MAX_TASKS 10
+#define MAX_TASKS 15
 
 class Scheduler {
-  
+private;
   int basePeriod;
   int nTasks;
   Task* taskList[MAX_TASKS];  
@@ -20,4 +20,3 @@ public:
 };
 
 #endif
-
