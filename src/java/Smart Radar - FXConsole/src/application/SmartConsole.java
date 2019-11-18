@@ -1,13 +1,11 @@
 package application;
 
-import javafx.scene.control.TextArea;
-
 public class SmartConsole {
-	private final CommChannel channel = new SerialCommChannel("COM1",9600);
-	private TextArea myConsole;
+	private final CommChannel channel = new SerialCommChannel("COM3",9600);
+	SampleController controller;
 	
-	public SmartConsole(final TextArea ta) throws InterruptedException {
-		myConsole = ta;
+	public SmartConsole(final SampleController contr) throws InterruptedException {
+		controller = contr;
 		communicating();
 	}
 		
@@ -15,14 +13,18 @@ public class SmartConsole {
 		Thread thread = new Thread(){
 			public void run(){
 				while(true) {
-					try {
-						myConsole.appendText("Arduino");
-						System.out.println("Waiting Arduino for rebooting...");		
-						Thread.sleep(4000);
-						System.out.println("Ready.");
-						
+					try {		
+						controller.setText("Waiting Arduino to connect..");
+						Thread.sleep(3000);
+						controller.setText("Ready");
+						while(true) {
+							if(channel.isMsgAvailable()) {								
+								String msg = channel.receiveMsg();
+								controller.setText("Received: " + msg);		
+							}
+						}
 					} catch (InterruptedException e) {
-						e.printStackTrace();
+						channel.close();
 					}
 				}
 			}
@@ -43,7 +45,5 @@ public class SmartConsole {
 
 //		System.out.println("Sending ping");
 //		channel.sendMsg("ping");
-//		String msg = channel.receiveMsg();
-//		System.out.println("Received: "+msg);		
 //		Thread.sleep(500);
 //		channel.close();
