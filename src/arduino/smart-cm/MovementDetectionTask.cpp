@@ -1,6 +1,6 @@
 #include "MovementDetectionTask.h"
 
-MovementDetectionTask::MovementDetectionTask(PIR* pir){
+MovementDetectionTask::MovementDetectionTask(Pir* pir){
   this->pir = pir;   
 }
 
@@ -11,4 +11,4 @@ void MovementDetectionTask::init(int period){
 void MovementDetectionTask::tick(){
   //forse è meglio farlo con interrupt ed eliminare il task
 }
-}
+

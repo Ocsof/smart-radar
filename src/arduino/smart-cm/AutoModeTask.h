@@ -8,6 +8,7 @@
 #include "Radar.h"
 
 class AutoModeTask: public Task {
+  PositionalServoMotor* servo;
   bool direction;
   bool* nearObjects;
 

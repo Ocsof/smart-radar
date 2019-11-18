@@ -7,7 +7,6 @@
 class PotentiometerReadTask: public Task {
   
   Potentiometer* potentiometer;
-  Command selectSpeed() = 0;
 
 public:
   PotentiometerReadTask(Potentiometer* potentiometer);  

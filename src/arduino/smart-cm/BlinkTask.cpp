@@ -10,18 +10,18 @@ void BlinkTask::init(int period){
 }
 
 void BlinkTask::tick(){
-  if(Radar.getMode() == Mode::SINGLE){
-    if(radar->getLastMeasure() != 0){
+  if(SmartRadar.getMode() == Mode::SINGLE){
+    if(SmartRadar.getLastMeasurement() != 0){
       led->switchOn();
     }else{
       led->switchOff();
     }
   }
-  if(Radar.getMode() == Mode::MANUAL){
+  if(SmartRadar.getMode() == Mode::MANUAL){
       led->switchOff();
   }
-  if(Radar.getMode() == Mode::AUTO){
-    if(Radar.isAlarmActive()){
+  if(SmartRadar.getMode() == Mode::AUTO){
+    if(SmartRadar.isAlarmActive()){
       if(led->isOn()){
         led->switchOff();
       }else{

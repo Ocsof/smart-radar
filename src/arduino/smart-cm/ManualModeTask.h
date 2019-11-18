@@ -5,7 +5,7 @@
 #include "Radar.h"
 
 class ManualModeTask: public Task {
-
+  PositionalServoMotor* servo;
 
 public:
   ManualModeTask();  

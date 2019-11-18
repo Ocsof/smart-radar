@@ -6,7 +6,7 @@
 
 class ButtonCheckTask: public Task {
 
-  Command command
+  Command command;
   Button* button;
 
 public:

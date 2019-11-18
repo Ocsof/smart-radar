@@ -9,8 +9,8 @@ void DistanceMeasurementTask::init(int period){
 }
 
 void DistanceMeasurementTask::tick(){
-  this->init(static_cast<int>Radar.getSpeed());
+  this->init(static_cast<int>(SmartRadar.getSpeed()));
   if(this->sonar->isEnabled()){
-    Radar.addMeasurement(this->sonar->getDistance());
+    SmartRadar.addMeasurement(this->sonar->getDistance());
   }
 }

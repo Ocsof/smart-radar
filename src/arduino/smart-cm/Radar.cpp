@@ -19,7 +19,7 @@ Radar *Radar::getInstance(void) {
 }
 
 // Default constructor
-Radar::Radar(void){
+Radar::Radar(){
   this->led = new Led(LED_PIN); 
   this->buttonS = new ButtonImpl(BUTTONS_PIN); 
   this->buttonM = new ButtonImpl(BUTTONM_PIN);
@@ -30,6 +30,8 @@ Radar::Radar(void){
   this->servoMotor = new PositionalServoMotorImpl(SERVO_MOTOR_PIN, this->numOfPositions);
   this->commandQueue = new Queue<Command>();
   this->lastMeasurement = 0;
+  this->currentMode = Mode::MANUAL;
+  this->currentSpeed = Speed::FAST;
 }
 
 
@@ -65,8 +67,40 @@ PositionalServoMotor* Radar::getServoMotor(){
     return this->servoMotor;
 }
 
+Mode Radar::getMode(){
+    return this->currentMode;
+}
+
+Speed Radar::getSpeed(){
+    return this->currentSpeed;
+}
+
 void Radar::enqueueCommand(Command serialCommand){
-    this->commandQueue->put(serialCommand);
+    switch(serialCommand){
+      case Command::SPEED_ULTRASLOW:  
+            this->currentSpeed = Speed::ULTRASLOW; 
+            break;
+      case Command::SPEED_SLOW:       
+            this->currentSpeed = Speed::SLOW; 
+            break;
+      case Command::SPEED_NORMAL:     
+            this->currentSpeed = Speed::NORMAL; 
+            break;
+      case Command::SPEED_FAST:       
+            this->currentSpeed = Speed::FAST; 
+            break;
+      case Command::MODE_MANUAL:      
+            this->currentMode = Mode::MANUAL; 
+            break;
+      case Command::MODE_SINGLE:      
+            this->currentMode = Mode::SINGLE; 
+            break;
+      case Command::MODE_AUTO:        
+            this->currentMode = Mode::AUTO; 
+            break;
+      default:  
+            this->commandQueue->put(serialCommand);
+    } 
 }
 
 Command Radar::dequeueCommand(){
@@ -84,7 +118,7 @@ bool Radar::isAlarmActive(){
     return this->isAlarmed;
 }
 
-void Radar::setCurrentMeasurement(int currentMeasurement){
+void Radar::addMeasurement(int currentMeasurement){
     this->lastMeasurement = currentMeasurement;
 }
 

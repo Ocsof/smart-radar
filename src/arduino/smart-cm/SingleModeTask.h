@@ -5,6 +5,7 @@
 #include "Radar.h"
 
 class SingleModeTask: public Task {
+  PositionalServoMotor* servo;
   bool resetting;
 
 public:

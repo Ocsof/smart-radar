@@ -10,7 +10,7 @@ void ButtonCheckTask::init(int period){
 }
 
 void ButtonCheckTask::tick(){
-  if(button->isPressed){
-    Radar.addCommand(this->command);
+  if(this->button->isPressed()){
+    SmartRadar.enqueueCommand(this->command);
   }
 }

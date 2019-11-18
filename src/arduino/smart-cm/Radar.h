@@ -14,6 +14,8 @@
 enum class Command {  MOVE_LEFT = 1, MOVE_RIGHT = 2, MODE_SINGLE = 11, MODE_MANUAL = 12,
                       MODE_AUTO = 13, SPEED_ULTRASLOW = 21, SPEED_SLOW = 22, 
                       SPEED_NORMAL = 23, SPEED_FAST = 24, NO_COMMAND = 0};
+enum class Speed { ULTRASLOW = 520, SLOW = 390, NORMAL = 260, FAST = 130 };
+enum class Mode { SINGLE, MANUAL, AUTO };
 
 class Radar {
 
@@ -27,11 +29,13 @@ public:
   Sonar* getSonar();
   Pir* getPir();
   PositionalServoMotor* getServoMotor();
+  Mode getMode();
+  Speed getSpeed();
   void enqueueCommand(Command serialCommand);
   Command dequeueCommand();
   void setAlarm(bool alarm);
   bool isAlarmActive();
-  void setCurrentMeasurement(int currentMeasurement);
+  void addMeasurement(int currentMeasurement);
   int getLastMeasurement();
 
 
@@ -39,7 +43,7 @@ public:
 
 private:
   static Radar* SINGLETON;
-  Radar(void);
+  Radar();
   Light* led;
   Button* buttonS;
   Button* buttonM;
@@ -48,6 +52,8 @@ private:
   Sonar* sonar;
   Pir* pir;
   PositionalServoMotor* servoMotor;
+  Mode currentMode;
+  Speed currentSpeed;
   Queue<Command>* commandQueue;
   bool isAlarmed;
   int lastMeasurement;
@@ -57,7 +63,6 @@ private:
 //Global variable accessible from the Arduino code for facilitating the use of this timer library
 extern Radar SmartRadar;
 
-enum class Speed { ULTRASLOW, SLOW, NORMAL, SPEED };
-enum class Mode { SINGLE, MANUAL, AUTO };
+
 
 #endif

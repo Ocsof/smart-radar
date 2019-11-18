@@ -1,11 +1,11 @@
 #include "Scheduler.h"
 #include "BlinkTask.h"
-#include "PrintTask.h"
 
-Scheduler sched;
+//Scheduler sched;
 
 void setup(){
-
+  Serial.begin(9600); 
+/*
   Serial.begin(9600);
   sched.init(100);
  
@@ -17,10 +17,11 @@ void setup(){
   
   sched.addTask(t0);
   sched.addTask(t1);
-   
+   */
 }
 
 void loop(){
-  sched.schedule();
+  
+  //sched.schedule();
 }
 

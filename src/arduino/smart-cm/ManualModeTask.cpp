@@ -2,7 +2,7 @@
 
 
 ManualModeTask::ManualModeTask(){
-  
+  this->servo = SmartRadar.getServoMotor();
 }
 
 void ManualModeTask::init(int period){
@@ -10,19 +10,22 @@ void ManualModeTask::init(int period){
 }
 
 void ManualModeTask::tick(){
-  if(Radar.getMode() == Mode::MANUAL){
-    this->init(static_cast<int>Radar.getSpeed());
+  if(SmartRadar.getMode() == Mode::MANUAL){
+    this->init(static_cast<int>(SmartRadar.getSpeed()));
     do{
-        Command command = Radar.dequeue();
+        Command command = SmartRadar.dequeueCommand();
         if(command == Command::MOVE_LEFT){
-          Radar.getServo()->decrementTarget();
+          this->servo->decrementTarget();
         }
         if(command == Command::MOVE_RIGHT){
-          Radar.getServo()->incrementTarget();
+          this->servo->incrementTarget();
         }
-      }while(command != Command::NO_COMMAND);
+        if(command == Command::NO_COMMAND){
+          break;
+        }
+      }while(true);
     
-    Radar.getServo()->stepForwardTarget();
+    this->servo->stepForwardTarget();
   }
 }
 
