@@ -1,9 +1,12 @@
 package controller;
 
+import view.ConsoleView;
+
 public class SmartConsole {
-	CommChannel channel = new SerialCommChannel("COM1",9600);
-	KeyboardListener kl = new KeyboardListener(this);
-	int a = 0;
+	private final CommChannel channel = new SerialCommChannel("COM1",9600);
+	private final KeyboardListener kl = new KeyboardListener(this);
+	private final ConsoleView view = new ConsoleView();
+	
 	
 	public SmartConsole() throws InterruptedException {
 		communicating();
@@ -22,21 +25,17 @@ public class SmartConsole {
 //		Thread.sleep(500);
 //		channel.close();		
 		Thread thread = new Thread(){
-		    public void run(){
-		    	while(true) {
-					System.out.println("loop" + a);
+			public void run(){
+				while(true) {
 					try {
-						Thread.sleep(500);
+						Thread.sleep(1000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					a++;
 				}
-		    }
-		  };
-		  thread.start();
-		
-		
+			}
+		};
+		thread.start();
 	}
 	
 	public void keyPressed(String msg) {		

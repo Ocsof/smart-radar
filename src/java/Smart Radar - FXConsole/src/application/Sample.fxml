@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+	<children>
+      <Button layoutX="894.0" layoutY="168.0" mnemonicParsing="false" onAction="#autoClicked" prefHeight="57.0" prefWidth="123.0" text="AUTO" />
+      <Button layoutX="364.0" layoutY="168.0" mnemonicParsing="false" onAction="#singleClicked" prefHeight="57.0" prefWidth="123.0" text="SINGLE" />
+      <Button layoutX="622.0" layoutY="168.0" mnemonicParsing="false" onAction="#manualClicked" prefHeight="57.0" prefWidth="123.0" text="MANUAL" />
+      <Label layoutX="406.0" layoutY="55.0" text="SMART RADAR - CONSOLE">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label layoutX="117.0" layoutY="182.0" text="Mode Selection:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="364.0" layoutY="331.0" mnemonicParsing="false" onAction="#ultraslowClicked" prefHeight="57.0" prefWidth="123.0" text="ULTRASLOW" />
+      <Button layoutX="539.0" layoutY="331.0" mnemonicParsing="false" onAction="#slowClicked" prefHeight="57.0" prefWidth="123.0" text="SLOW" />
+      <Button layoutX="718.0" layoutY="331.0" mnemonicParsing="false" onAction="#normalClicked" prefHeight="57.0" prefWidth="123.0" text="NORMAL" />
+      <Button layoutX="894.0" layoutY="331.0" mnemonicParsing="false" onAction="#fastClicked" prefHeight="57.0" prefWidth="123.0" text="FAST" />
+      <Label layoutX="117.0" layoutY="351.0" text="Speed Selection:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="myConsole" layoutX="117.0" layoutY="451.0" prefHeight="284.0" prefWidth="966.0" style="-fx-background-color: BLACK;" />
+   </children>
+</AnchorPane>
