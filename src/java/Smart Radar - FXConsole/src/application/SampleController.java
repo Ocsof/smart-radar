@@ -1,8 +1,13 @@
 package application;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 
 public class SampleController {
 	
@@ -54,16 +59,28 @@ public class SampleController {
 			case LEFT:
 				console.getChannel().sendMsg("LEFT");
 				myConsole.appendText("\n" + "Rotating Sonar to LEFT");
+				break;
 			case RIGHT:
 				console.getChannel().sendMsg("RIGHT");
 				myConsole.appendText("\n" + "Rotating Sonar to RIGHT");
+				break;
 			default:
 			break;
 		}
-		 //System.out.println("Key Pressed: " + ke.getCode());
+	}
+	
+	public void setAlarm(boolean isOn) {
+		if(isOn) {
+			myConsole.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+			myConsole.appendText("\n" + "---------ALLARME--------");
+		} 
+		if(!isOn) {
+			myConsole.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+			myConsole.appendText("\n" + "---------fine allarme :) --------");
+		}
 	}
 	
 	public void setText(String msg) {
-		myConsole.appendText("\n" + msg);
+		myConsole.setText(msg);
 	}
 }

@@ -4,7 +4,7 @@ public class SmartConsole {
 	private final CommChannel channel = new SerialCommChannel("COM3",9600);
 	SampleController controller;
 	
-	public SmartConsole(final SampleController contr) throws InterruptedException {
+	public SmartConsole(SampleController contr) throws InterruptedException {
 		controller = contr;
 		communicating();
 	}
@@ -14,13 +14,19 @@ public class SmartConsole {
 			public void run(){
 				while(true) {
 					try {		
-						controller.setText("Waiting Arduino to connect..");
 						Thread.sleep(3000);
 						controller.setText("Ready");
 						while(true) {
 							if(channel.isMsgAvailable()) {								
 								String msg = channel.receiveMsg();
-								controller.setText("Received: " + msg);		
+								if(msg.equals("on")) {
+									controller.setAlarm(true);
+								} else if(msg.equals("off")) {
+									controller.setAlarm(false);
+								} else {
+									controller.setText("Received:  " + msg);	
+								}
+								Thread.sleep(500);
 							}
 						}
 					} catch (InterruptedException e) {
@@ -31,19 +37,9 @@ public class SmartConsole {
 		};
 		thread.start();
 	}
-	
-//	public void keyPressed(String msg) {		
-//		System.out.println("key pressed");
-//		channel.sendMsg(msg);
-//	}
 		
 	public CommChannel getChannel() {
 		return this.channel;
 	}
 }
 
-
-//		System.out.println("Sending ping");
-//		channel.sendMsg("ping");
-//		Thread.sleep(500);
-//		channel.close();
