@@ -8,8 +8,10 @@ public:
   Led(int pin);
   void switchOn();
   void switchOff();    
+  bool isOn();
 private:
   int pin;  
+  bool isLedOn;
 };
 
 #endif

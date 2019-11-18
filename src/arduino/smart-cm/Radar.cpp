@@ -27,8 +27,9 @@ Radar::Radar(void){
   this->potentiometer = new PotentiometerImpl(POTENTIOMETER_PIN);
   this->sonar = new SonarImpl(SONAR_TRIG_PIN, SONAR_ECHO_PIN);
   this->pir = new PirImpl(PIR_PIN);
-  this->servoMotor = new PositionalServoMotorImpl(SERVO_MOTOR_PIN);
+  this->servoMotor = new PositionalServoMotorImpl(SERVO_MOTOR_PIN, this->numOfPositions);
   this->commandQueue = new Queue<Command>();
+  this->lastMeasurement = 0;
 }
 
 
@@ -65,11 +66,30 @@ PositionalServoMotor* Radar::getServoMotor(){
 }
 
 void Radar::enqueueCommand(Command serialCommand){
-    this->commandQueue->push(serialCommand);
+    this->commandQueue->put(serialCommand);
 }
 
 Command Radar::dequeueCommand(){
-    return this->commandQueue->pop();
+    if(this->commandQueue->empty()) {
+        return Command::NO_COMMAND;
+    }
+    return this->commandQueue->get();
+}
+
+void Radar::setAlarm(bool alarm){
+    this->isAlarmed = alarm; 
+}
+
+bool Radar::isAlarmActive(){
+    return this->isAlarmed;
+}
+
+void Radar::setCurrentMeasurement(int currentMeasurement){
+    this->lastMeasurement = currentMeasurement;
+}
+
+int Radar::getLastMeasurement(){
+    return this->lastMeasurement;
 }
 
 // Creating an "alias" to the singleton instance of this class so as to easily access it from the Arduino code

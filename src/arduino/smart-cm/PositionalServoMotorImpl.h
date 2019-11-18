@@ -8,23 +8,25 @@
 class PositionalServoMotorImpl: public PositionalServoMotor {
 
 public:
-  PositionalServoMotorImpl(int pin);
-
+  PositionalServoMotorImpl(int pin, int numOfPositions);
   void on();
-  int getCurrentAngle();
+  int getCurrentPosition();
   void off();
   void incrementTarget();
   void decrementTarget();
   void stepForwardTarget();
   void alignTarget();
+  int getNumOfPositions();
+  int getStepValue();
+
     
 private:
   int pin; 
-  int currentAngle;
+  int currentPosition;
   int target;
-  const int step = 12;
+  int step;
+  int numOfPositions;
   ServoTimer2 motor;
-  void setAngle(int angle);
 };
 
 #endif

@@ -29,6 +29,12 @@ public:
   PositionalServoMotor* getServoMotor();
   void enqueueCommand(Command serialCommand);
   Command dequeueCommand();
+  void setAlarm(bool alarm);
+  bool isAlarmActive();
+  void setCurrentMeasurement(int currentMeasurement);
+  int getLastMeasurement();
+
+
   
 
 private:
@@ -43,6 +49,9 @@ private:
   Pir* pir;
   PositionalServoMotor* servoMotor;
   Queue<Command>* commandQueue;
+  bool isAlarmed;
+  int lastMeasurement;
+  const int numOfPositions = 16;  //numero di posizioni che puo' assumere il servo!!
 };
 
 //Global variable accessible from the Arduino code for facilitating the use of this timer library

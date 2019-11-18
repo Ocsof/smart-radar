@@ -1,24 +1,20 @@
 #include "PositionalServoMotorImpl.h"
 #include "Arduino.h"
 
-PositionalServoMotorImpl::PositionalServoMotorImpl(int pin){
+PositionalServoMotorImpl::PositionalServoMotorImpl(int pin, int numOfPositions){
   this->pin = pin; 
-  this->currentAngle = 0; 
+  this->currentPosition = 0; 
   this->target = 0;
-  this->setAngle(this->currentAngle);
+  this->numOfPositions = numOfPositions,
+  this->step = 180 / (this->numOfPositions - 1); // 180 / number of steps
 } 
 
 void PositionalServoMotorImpl::on(){
   motor.attach(pin);    
 }
 
-void PositionalServoMotorImpl::setAngle(int angle){
-  this->currentAngle = angle;
-  motor.write(this->currentAngle);          
-}
-
-int PositionalServoMotorImpl::getCurrentAngle(){
-  return this->currentAngle;
+int PositionalServoMotorImpl::getCurrentPosition(){
+  return this->currentPosition;
 }
 
 void PositionalServoMotorImpl::off(){
@@ -34,14 +30,20 @@ void PositionalServoMotorImpl::decrementTarget(){
 }
 
 void PositionalServoMotorImpl::stepForwardTarget(){
-  if(this->currentAngle > this->target){
-    this->currentAngle -= step;
+  if(this->currentPosition > this->target){
+    this->currentPosition -= step;
   }
   else{
-    this->currentAngle += step;
+    this->currentPosition += step;
   }
 }
 
 void PositionalServoMotorImpl::alignTarget(){
-  this->target = this->currentAngle;
+  this->target = this->currentPosition;
+}
+
+int PositionalServoMotorImpl::getStepValue(){
+  return this->step;
 };
+
+
