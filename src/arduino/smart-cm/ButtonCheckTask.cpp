@@ -1,17 +1,16 @@
 #include "ButtonCheckTask.h"
 
-ButtonCheckTask::ButtonCheckTask(int pin, Mode mode){
-  this->pin = pin;  
-  this->mode = mode;  
+ButtonCheckTask::ButtonCheckTask(Button* button, Command command){
+  this->button = button;  
+  this->command = command;  
 }
 
 void ButtonCheckTask::init(int period){
-  Task::init(period);
-  this->button = new Button(pin);  
+  Task::init(period); 
 }
 
 void ButtonCheckTask::tick(){
   if(button->isPressed){
-    radar->setMode(this->mode);
+    Radar.addCommand(this->command);
   }
 }

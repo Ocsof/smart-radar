@@ -4,14 +4,12 @@
 #include "Task.h"
 #include "Radar.h"
 
-class BlinkTask: public Task {
 
-private:
-  int pin;
+class BlinkTask: public Task {
   Led* led;
 
 public:
-  BlinkTask(int pin);  
+  BlinkTask(Led* led);  
   void init(int period);  
   void tick();
 };

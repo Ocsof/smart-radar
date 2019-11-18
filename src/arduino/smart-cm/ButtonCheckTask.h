@@ -6,14 +6,12 @@
 
 class ButtonCheckTask: public Task {
 
-private:
-  int pin;
-  Mode mode;
+  Command command
   Button* button;
 
 public:
 
-  ButtonCheckTask(int pin, Mode mode);  
+  ButtonCheckTask(Button* button, Command command);  
   void init(int period);  
   void tick();
 };

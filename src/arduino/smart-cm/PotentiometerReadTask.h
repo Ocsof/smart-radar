@@ -5,13 +5,12 @@
 #include "Radar.h"
 
 class PotentiometerReadTask: public Task {
-private:
-  int pin;
-  Potentiometer* pot;
-  Speed selectSpeed();
+  
+  Potentiometer* potentiometer;
+  Command selectSpeed() = 0;
 
 public:
-  PotentiometerReadTask(int pin);  
+  PotentiometerReadTask(Potentiometer* potentiometer);  
   void init(int period);  
   void tick();
 };

@@ -6,12 +6,10 @@
 
 class MovementDetectionTask: public Task {
 
-private:
-  int pin;
   PIR* pir;
 
 public:
-  MovementDetectionTask(int pin);  
+  MovementDetectionTask(PIR* pir);  
   void init(int period);  
   void tick();
 };

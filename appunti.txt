@@ -1,0 +1,12 @@
+Variabili globali
+-mode {SINGLE, MANUAL, AUTO}
+-speed {ULTRASLOW, SLOW, NORMAL, FAST}
+-position {1-16}
+
+Durata task
+-buttons: 10ms (dev'essere < del tempo che la pressione del pulsante fa mantenere la tensione HIGH)
+-pot: 50ms (nessuna criticità, anche di più a piacere)
+-manualRead: 130ms
+-servo: 130ms 260ms 390ms 520ms (from FAST to ULTRASLOW, 2080ms 4160ms 6240ms 8320ms per sweep completo [N=16])
+-sonar: [priorità: dopo servo] periodo come quello del servo ma con +Tnecessario al motorino per cambiare posizione (bisogna provare, sarà 50ms boh)
+-
