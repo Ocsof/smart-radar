@@ -1,8 +1,8 @@
 #ifndef __AUTOMODETASK__
 #define __AUTOMODETASK__
 
-#define D_NEAR 0.2
-#define D_FAR 0.4
+#define D_NEAR 20
+#define D_FAR 40
 
 #include "Task.h"
 #include "Radar.h"

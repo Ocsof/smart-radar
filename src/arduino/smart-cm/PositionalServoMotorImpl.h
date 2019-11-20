@@ -27,6 +27,7 @@ private:
   int step;
   int numOfPositions;
   ServoTimer2 motor;
+  int convertPosition(int position);
 };
 
 #endif

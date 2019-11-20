@@ -21,7 +21,7 @@ int SonarImpl::getDistance(){
     float tUS = pulseIn(this->echoPin, HIGH, this->timeout);
     float t = tUS / 1000.0 / 1000.0 / 2;
     this->distance = t * this->vs;
-    return this->distance;
+    return this->distance * 100;
 }
 
 void SonarImpl::setEnabled(bool enabled){
