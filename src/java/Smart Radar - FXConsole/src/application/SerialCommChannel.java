@@ -1,5 +1,6 @@
 package application;
 
+import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -27,7 +28,9 @@ public class SerialCommChannel implements CommChannel, SerialPortEventListener {
 	
 	@Override
 	public void sendMsg(String msg) {
-		char[] array = (msg+"\n").toCharArray();
+		//char[] array = (msg+"\n").toCharArray();
+		int num = Integer.parseInt(msg);
+		int[] array = {num};
 		byte[] bytes = new byte[array.length];
 		for (int i = 0; i < array.length; i++){
 			bytes[i] = (byte) array[i];

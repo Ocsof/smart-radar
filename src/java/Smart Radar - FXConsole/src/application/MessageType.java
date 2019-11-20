@@ -14,20 +14,18 @@ public enum MessageType {
 	
 	NORMAL("6"),
 	
-	FAST("7");
+	FAST("7"),
+	
+	RIGHT("8"),
+	
+	LEFT("9");
 	
 	private final String name;
-    /**
-     * Construct a {@code MainMenuOption}.
-     * @param name of main menu option
-     */
+    
     MessageType(final String name) {
         this.name = name;
     }
-    /**
-     * To string method.
-     * @return name associate to each MainMenuOption
-     */
+    
     public String toString() {
         return name;
     }

@@ -57,11 +57,11 @@ public class SampleController {
 	public void handleKeyPressed(KeyEvent ke){
 		switch(ke.getCode()) {		
 			case LEFT:
-				console.getChannel().sendMsg("LEFT");
+				console.getChannel().sendMsg(MessageType.LEFT.toString());
 				myConsole.appendText("\n" + "Rotating Sonar to LEFT");
 				break;
 			case RIGHT:
-				console.getChannel().sendMsg("RIGHT");
+				console.getChannel().sendMsg(MessageType.RIGHT.toString());
 				myConsole.appendText("\n" + "Rotating Sonar to RIGHT");
 				break;
 			default:

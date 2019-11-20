@@ -1,7 +1,7 @@
 package application;
 
 public class SmartConsole {
-	private final CommChannel channel = new SerialCommChannel("COM3",9600);
+	private final CommChannel channel = new SerialCommChannel("/dev/cu.usbmodem1421",9600);
 	SampleController controller;
 	
 	public SmartConsole(SampleController contr) throws InterruptedException {
@@ -13,8 +13,8 @@ public class SmartConsole {
 		Thread thread = new Thread(){
 			public void run(){
 				while(true) {
-					try {		
-						Thread.sleep(3000);
+					try {
+						Thread.sleep(1000);
 						controller.setText("Ready");
 						while(true) {
 							if(channel.isMsgAvailable()) {								
