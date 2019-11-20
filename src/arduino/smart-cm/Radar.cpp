@@ -1,42 +1,51 @@
 #include "Radar.h"
 
 /****** dare i numeri dei piiiiiiin ***/
-#define LED_PIN 5
-#define BUTTONS_PIN 6
-#define BUTTONM_PIN 7
-#define BUTTONA_PIN 8
-#define POTENTIOMETER_PIN 9
-#define SONAR_TRIG_PIN 10
-#define SONAR_ECHO_PIN 11
-#define PIR_PIN 2
-#define SERVO_MOTOR_PIN 13
+#define DETECTION_LED_PIN 6
+#define ALARM_LED_PIN 5
+#define BUTTONS_PIN 2
+#define BUTTONM_PIN 3
+#define BUTTONA_PIN 4
+#define POTENTIOMETER_PIN 15
+#define SONAR_TRIG_PIN 10 //da metter giusto
+#define SONAR_ECHO_PIN 11 //da metter giusto
+#define PIR_PIN 12 //da metter giusto
+#define SERVO_MOTOR_PIN 13 //da metter giusto
 
 
-Radar *Radar::SINGLETON {};
+Radar *Radar::SINGLETON = 0;
 
 Radar *Radar::getInstance(void) {
+    if(SINGLETON == 0){
+      SINGLETON = new Radar();
+    }
     return SINGLETON;
 }
 
 // Default constructor
 Radar::Radar(){
-  this->led = new Led(LED_PIN); 
+  this->detectionLed = new Led(DETECTION_LED_PIN); 
+  this->alarmLed = new Led(ALARM_LED_PIN);
   this->buttonS = new ButtonImpl(BUTTONS_PIN); 
   this->buttonM = new ButtonImpl(BUTTONM_PIN);
   this->buttonA = new ButtonImpl(BUTTONA_PIN);
   this->potentiometer = new PotentiometerImpl(POTENTIOMETER_PIN);
-  this->sonar = new SonarImpl(SONAR_TRIG_PIN, SONAR_ECHO_PIN);
-  this->pir = new PirImpl(PIR_PIN);
-  this->servoMotor = new PositionalServoMotorImpl(SERVO_MOTOR_PIN, this->numOfPositions);
-  this->commandQueue = new Queue<Command>();
-  this->lastMeasurement = 0;
-  this->currentMode = Mode::MANUAL;
-  this->currentSpeed = Speed::FAST;
+//  this->sonar = new SonarImpl(SONAR_TRIG_PIN, SONAR_ECHO_PIN);
+//  this->pir = new PirImpl(PIR_PIN);
+//  this->servoMotor = new PositionalServoMotorImpl(SERVO_MOTOR_PIN, this->numOfPositions);
+//  this->commandQueue = new Queue<Command>();
+//  this->lastMeasurement = 0;
+//  this->currentMode = Mode::MANUAL;
+//  this->currentSpeed = Speed::FAST;
 }
 
 
-Light* Radar::getLed(){
-  return this->led;   
+Led* Radar::getDetectionLed(){
+  return this->detectionLed;   
+}
+
+Led* Radar::getAlarmLed(){
+  return this->alarmLed;   
 }
 
 Button* Radar::getButtonS(){

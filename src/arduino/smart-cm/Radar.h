@@ -21,7 +21,8 @@ class Radar {
 
 public:
   static Radar* getInstance();
-  Light* getLed();
+  Led* getDetectionLed();
+  Led* getAlarmLed();
   Button* getButtonS();
   Button* getButtonM();
   Button* getButtonA();
@@ -44,7 +45,8 @@ public:
 private:
   static Radar* SINGLETON;
   Radar();
-  Light* led;
+  Led* detectionLed;
+  Led* alarmLed;
   Button* buttonS;
   Button* buttonM;
   Button* buttonA;

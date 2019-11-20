@@ -4,12 +4,8 @@
 
 //Scheduler sched;
 
-PositionalServoMotor* servo;
-bool flag;
 void setup(){
   Serial.begin(9600); 
-  servo = new PositionalServoMotorImpl(6, 16);
-  flag = true;
 /*
   Serial.begin(9600);
   sched.init(100);
@@ -26,16 +22,16 @@ void setup(){
 }
 
 void loop(){
-  if(flag){
-    servo->incrementTarget();
-  }else{
-    servo->decrementTarget();
-  }
-  servo->stepForwardTarget();
-  Serial.println(servo->getCurrentPosition());
-  if(servo->getCurrentPosition() == 15 || servo->getCurrentPosition() == 0){
-    flag = !flag;
-  }
-  delay(200);
-  
+  Serial.println(SmartRadar.getAlarmLed()->isOn());
+   if(SmartRadar.getButtonA()->isPressed()){
+    Serial.println("PRESSED");
+    if(!SmartRadar.getAlarmLed()->isOn()){
+      SmartRadar.getAlarmLed()->switchOn();
+      delay(10);
+    }else{
+      SmartRadar.getAlarmLed()->switchOff();
+      delay(10);
+    }
+   }
+   delay(115);
 }
