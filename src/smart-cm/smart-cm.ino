@@ -7,6 +7,7 @@
 
 Radar* SmartRadar;
 bool flag;
+PositionalServoMotor* servo;
 void setup(){
   Serial.begin(9600); 
   SmartRadar = new Radar();
@@ -28,7 +29,7 @@ void setup(){
 }
 
 void loop(){
-  Serial.println(SmartRadar.getLastMeasurement());
+  Serial.println(SmartRadar->getLastMeasurement());
   Serial.println(servo->getCurrentPosition());
   servo->incrementTarget();
   servo->stepForwardTarget();

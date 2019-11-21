@@ -1,7 +1,8 @@
 #include "MovementDetectionTask.h"
 
-MovementDetectionTask::MovementDetectionTask(Pir* pir){
-  this->pir = pir;   
+MovementDetectionTask::MovementDetectionTask(Radar* SmartRadar){
+  this->SmartRadar = SmartRadar;
+  this->pir = SmartRadar->getPir();   
 }
 
 void MovementDetectionTask::init(int period){
@@ -11,4 +12,3 @@ void MovementDetectionTask::init(int period){
 void MovementDetectionTask::tick(){
   //forse è meglio farlo con interrupt ed eliminare il task
 }
-

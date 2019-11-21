@@ -9,11 +9,12 @@
 
 class AutoModeTask: public Task {
   PositionalServoMotor* servo;
+  Radar* SmartRadar;
   bool direction;
   bool* nearObjects;
 
 public:
-  AutoModeTask();  
+  AutoModeTask(Radar* SmartRadar);  
   void init(int period);  
   void tick();
 };

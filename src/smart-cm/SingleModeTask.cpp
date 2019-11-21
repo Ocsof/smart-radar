@@ -3,8 +3,9 @@
 #define RESETTING_PERIOD 100
 
 
-SingleModeTask::SingleModeTask(){
-  this->servo = SmartRadar.getServoMotor();
+SingleModeTask::SingleModeTask(Radar* SmartRadar){
+  this->SmartRadar = SmartRadar;
+  this->servo = SmartRadar->getServoMotor();
   this->resetting = true;
 }
 
@@ -13,21 +14,21 @@ void SingleModeTask::init(int period){
 }
 
 void SingleModeTask::tick(){     //primo taskmode schedulato
-  if(SmartRadar.getMode() == Mode::SINGLE){
+  if(SmartRadar->getMode() == Mode::SINGLE){
     if(this->resetting){
       this->init(RESETTING_PERIOD);
-      SmartRadar.getSonar()->setEnabled(false);
+      SmartRadar->getSonar()->setEnabled(false);
       if(this->servo->getCurrentPosition() != 0){
         this->servo->decrementTarget();
         this->servo->stepForwardTarget();
       }else{
         this->resetting = false;
-        SmartRadar.getSonar()->setEnabled(true);
+        SmartRadar->getSonar()->setEnabled(true);
       }
     }else{
-      this->init(static_cast<int>(SmartRadar.getSpeed()));
+      this->init(static_cast<int>(SmartRadar->getSpeed()));
       do{ 
-      }while(SmartRadar.dequeueCommand() != Command::NO_COMMAND);
+      }while(SmartRadar->dequeueCommand() != Command::NO_COMMAND);
       if(!this->servo->getCurrentPosition() == this->servo->getNumOfPositions()){
         this->servo->incrementTarget();
         this->servo->stepForwardTarget();
@@ -35,6 +36,6 @@ void SingleModeTask::tick(){     //primo taskmode schedulato
     }
   }else{
     this->resetting = true;
-    SmartRadar.getSonar()->setEnabled(true);
+    SmartRadar->getSonar()->setEnabled(true);
   }
 }

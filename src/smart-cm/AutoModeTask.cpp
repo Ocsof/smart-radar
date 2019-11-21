@@ -1,8 +1,9 @@
 #include "AutoModeTask.h"
 
 
-AutoModeTask::AutoModeTask(){
-  this->servo = SmartRadar.getServoMotor();
+AutoModeTask::AutoModeTask(Radar* SmartRadar){
+  this->SmartRadar = SmartRadar;
+  this->servo = SmartRadar->getServoMotor();
   this->direction = true;
   this->nearObjects = new bool[this->servo->getNumOfPositions()];
 }
@@ -12,20 +13,20 @@ void AutoModeTask::init(int period){
 }
 
 void AutoModeTask::tick(){
-  if(SmartRadar.getMode() == Mode::AUTO){
-    this->nearObjects[this->servo->getCurrentPosition()] = SmartRadar.getLastMeasurement() >= D_NEAR && SmartRadar.getLastMeasurement() <= D_FAR;
+  if(SmartRadar->getMode() == Mode::AUTO){
+    this->nearObjects[this->servo->getCurrentPosition()] = SmartRadar->getLastMeasurement() >= D_NEAR && SmartRadar->getLastMeasurement() <= D_FAR;
     for(int i = 0; i<16; i++){
       if(this->nearObjects[i]){
-        SmartRadar.setAlarm(true);
+        SmartRadar->setAlarm(true);
         break;
       }
       if(i == 15){
-        SmartRadar.setAlarm(false);
+        SmartRadar->setAlarm(false);
       }
     }
-    this->init(static_cast<int>(SmartRadar.getSpeed()));
+    this->init(static_cast<int>(SmartRadar->getSpeed()));
     do{
-    }while(SmartRadar.dequeueCommand() != Command::NO_COMMAND);
+    }while(SmartRadar->dequeueCommand() != Command::NO_COMMAND);
     if(this->servo->getCurrentPosition() == 0){
       this->direction = true;
     }
@@ -40,5 +41,3 @@ void AutoModeTask::tick(){
     this->servo->stepForwardTarget();
   }
 }
-
-

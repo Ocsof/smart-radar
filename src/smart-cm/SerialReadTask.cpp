@@ -1,7 +1,7 @@
 #include "SerialReadTask.h"
 
-SerialReadTask::SerialReadTask(){
-  
+SerialReadTask::SerialReadTask(Radar* SmartRadar){
+  this->SmartRadar = SmartRadar;
 }
 
 void SerialReadTask::init(int period){
@@ -10,6 +10,6 @@ void SerialReadTask::init(int period){
 
 void SerialReadTask::tick(){
   if (Serial.available() > 0) {
-    SmartRadar.enqueueCommand(static_cast<Command>(Serial.read()));
+    SmartRadar->enqueueCommand(static_cast<Command>(Serial.read()));
   }
 }

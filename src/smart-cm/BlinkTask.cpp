@@ -1,7 +1,9 @@
 #include "BlinkTask.h"
 
-BlinkTask::BlinkTask(Led* led){
-  this->led = led;   
+BlinkTask::BlinkTask(Radar* SmartRadar){
+  this->SmartRadar = SmartRadar;
+  this->detectionLed = this->SmartRadar->getDetectionLed(); 
+  this->alarmLed = this->SmartRadar->getAlarmLed();  
 }
 
 
@@ -10,25 +12,25 @@ void BlinkTask::init(int period){
 }
 
 void BlinkTask::tick(){
-  if(SmartRadar.getMode() == Mode::SINGLE){
-    if(SmartRadar.getLastMeasurement() != 0){
-      led->switchOn();
+  if(SmartRadar->getMode() == Mode::SINGLE){
+    if(SmartRadar->getLastMeasurement() != 0){
+      this->detectionLed->switchOn();
     }else{
-      led->switchOff();
+      this->detectionLed->switchOff();
     }
   }
-  if(SmartRadar.getMode() == Mode::MANUAL){
-      led->switchOff();
+  if(SmartRadar->getMode() == Mode::MANUAL){
+      detectionLed->switchOff();
   }
-  if(SmartRadar.getMode() == Mode::AUTO){
-    if(SmartRadar.isAlarmActive()){
-      if(led->isOn()){
-        led->switchOff();
+  if(SmartRadar->getMode() == Mode::AUTO){
+    if(SmartRadar->isAlarmActive()){
+      if(alarmLed->isOn()){
+        alarmLed->switchOff();
       }else{
-        led->switchOn();
+        alarmLed->switchOn();
       }
     }else{
-      led->switchOff();
+      alarmLed->switchOff();
     }
   }
 }

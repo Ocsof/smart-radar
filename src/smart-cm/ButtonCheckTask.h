@@ -8,10 +8,11 @@ class ButtonCheckTask: public Task {
 
   Command command;
   Button* button;
+  Radar* SmartRadar;
 
 public:
 
-  ButtonCheckTask(Button* button, Command command);  
+  ButtonCheckTask(Radar* SmartRadar ,Button* button, Command command);  
   void init(int period);  
   void tick();
 };

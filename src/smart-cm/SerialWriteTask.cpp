@@ -1,7 +1,7 @@
 #include "SerialWriteTask.h"
 
-SerialWriteTask::SerialWriteTask(){
-
+SerialWriteTask::SerialWriteTask(Radar* SmartRadar){
+  this->SmartRadar = SmartRadar;
 }
 
 void SerialWriteTask::init(int period){
@@ -9,10 +9,10 @@ void SerialWriteTask::init(int period){
 }
 
 void SerialWriteTask::tick(){
-  this->init(static_cast<int>(SmartRadar.getSpeed()));
-  int lastMeasurement = SmartRadar.getLastMeasurement();
+  this->init(static_cast<int>(SmartRadar->getSpeed()));
+  int lastMeasurement = SmartRadar->getLastMeasurement();
   Serial.print("Current position: ");
-  Serial.print(SmartRadar.getServoMotor()->getStepValue() * SmartRadar.getServoMotor()->getCurrentPosition());
+  Serial.print(SmartRadar->getServoMotor()->getStepValue() * SmartRadar->getServoMotor()->getCurrentPosition());
   if(lastMeasurement == 0){
     Serial.print(" ; No objects detected;\n");
   }else{
@@ -20,7 +20,7 @@ void SerialWriteTask::tick(){
     Serial.print(lastMeasurement);
     Serial.print(" m;\n");
   }
-  if(SmartRadar.isAlarmActive()){
+  if(SmartRadar->isAlarmActive()){
     Serial.print("on\n");
   }else{
     Serial.print("off\n");

@@ -1,8 +1,9 @@
 #include "ManualModeTask.h"
 
 
-ManualModeTask::ManualModeTask(){
-  this->servo = SmartRadar.getServoMotor();
+ManualModeTask::ManualModeTask(Radar* SmartRadar){
+  this->SmartRadar = SmartRadar;
+  this->servo = SmartRadar->getServoMotor();
 }
 
 void ManualModeTask::init(int period){
@@ -10,10 +11,10 @@ void ManualModeTask::init(int period){
 }
 
 void ManualModeTask::tick(){
-  if(SmartRadar.getMode() == Mode::MANUAL){
-    this->init(static_cast<int>(SmartRadar.getSpeed()));
+  if(SmartRadar->getMode() == Mode::MANUAL){
+    this->init(static_cast<int>(SmartRadar->getSpeed()));
     do{
-        Command command = SmartRadar.dequeueCommand();
+        Command command = SmartRadar->dequeueCommand();
         if(command == Command::MOVE_LEFT){
           this->servo->decrementTarget();
         }
@@ -28,5 +29,3 @@ void ManualModeTask::tick(){
     this->servo->stepForwardTarget();
   }
 }
-
-

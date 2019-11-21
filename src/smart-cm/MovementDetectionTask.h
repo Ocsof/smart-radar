@@ -6,10 +6,11 @@
 
 class MovementDetectionTask: public Task {
 
+  Radar* SmartRadar;
   Pir* pir;
 
 public:
-  MovementDetectionTask(Pir* pir);  
+  MovementDetectionTask(Radar* SmartRadar);  
   void init(int period);  
   void tick();
 };

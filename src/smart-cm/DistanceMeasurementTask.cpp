@@ -1,7 +1,8 @@
 #include "DistanceMeasurementTask.h"
 
-DistanceMeasurementTask::DistanceMeasurementTask(Sonar* sonar){
-  this->sonar = sonar;   
+DistanceMeasurementTask::DistanceMeasurementTask(Radar* SmartRadar){
+  this->SmartRadar = SmartRadar;
+  this->sonar = SmartRadar->getSonar();   
 }
 
 void DistanceMeasurementTask::init(int period){
@@ -9,8 +10,8 @@ void DistanceMeasurementTask::init(int period){
 }
 
 void DistanceMeasurementTask::tick(){
-  this->init(static_cast<int>(SmartRadar.getSpeed()));
+  this->init(static_cast<int>(SmartRadar->getSpeed()));
   if(this->sonar->isEnabled()){
-    SmartRadar.addMeasurement(this->sonar->getDistance());
+    SmartRadar->addMeasurement(this->sonar->getDistance());
   }
 }
