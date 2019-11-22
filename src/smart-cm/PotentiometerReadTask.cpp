@@ -2,7 +2,8 @@
 
 PotentiometerReadTask::PotentiometerReadTask(Radar* SmartRadar){
   this->SmartRadar = SmartRadar;
-  this->potentiometer = SmartRadar->getPotentiometer();   
+  this->potentiometer = SmartRadar->getPotentiometer(); 
+  this->speed = Command::SPEED_FAST;  
 }
 
 void PotentiometerReadTask::init(int period){
@@ -24,5 +25,7 @@ void PotentiometerReadTask::tick(){
     case 768 ... 1023:
       command = Command::SPEED_FAST;
   }
-  SmartRadar->enqueueCommand(command);
+  if(command != this->speed){
+    SmartRadar->enqueueCommand(command);
+  }
 }

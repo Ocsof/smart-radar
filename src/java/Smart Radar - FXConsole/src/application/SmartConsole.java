@@ -26,7 +26,7 @@ public class SmartConsole {
 								} else {
 									controller.setText("Received:  " + msg);	
 								}
-								Thread.sleep(500);
+								Thread.sleep(100);
 							}
 						}
 					} catch (InterruptedException e) {

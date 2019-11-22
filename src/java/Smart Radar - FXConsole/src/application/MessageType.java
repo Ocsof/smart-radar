@@ -2,23 +2,23 @@ package application;
 
 public enum MessageType {
 	
-	AUTO("1"),
+	AUTO("13"),
 	
-	MANUAL("2"),
+	MANUAL("12"),
 	
-	SINGLE("3"),
+	SINGLE("11"),
 	
-	ULTRASLOW("4"),
+	ULTRASLOW("21"),
 	
-	SLOW("5"),
+	SLOW("22"),
 	
-	NORMAL("6"),
+	NORMAL("23"),
 	
-	FAST("7"),
+	FAST("24"),
 	
-	RIGHT("8"),
+	RIGHT("2"),
 	
-	LEFT("9");
+	LEFT("1");
 	
 	private final String name;
     

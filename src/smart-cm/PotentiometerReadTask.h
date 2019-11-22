@@ -8,6 +8,7 @@ class PotentiometerReadTask: public Task {
 
   Radar* SmartRadar;
   Potentiometer* potentiometer;
+  Command speed;
 
 public:
   PotentiometerReadTask(Radar* SmartRadar);  

@@ -70,17 +70,17 @@ public class SampleController {
 	}
 	
 	public void setAlarm(boolean isOn) {
-		if(isOn) {
-			myConsole.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
-			myConsole.appendText("\n" + "---------ALLARME--------");
-		} 
-		if(!isOn) {
-			myConsole.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-			myConsole.appendText("\n" + "---------fine allarme :) --------");
-		}
+//		if(isOn) {
+//			myConsole.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+//			myConsole.appendText("\n" + "---------ALLARME--------");
+//		} 
+//		if(!isOn) {
+//			myConsole.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+//			myConsole.appendText("\n" + "---------fine allarme :) --------");
+//		}
 	}
 	
 	public void setText(String msg) {
-		myConsole.setText(msg);
+		myConsole.appendText("\n" + msg);
 	}
 }
