@@ -18,10 +18,10 @@ void BlinkTask::tick(){
     }else{
       this->detectionLed->switchOff();
     }
+  }else{
+    detectionLed->switchOff();
   }
-  if(SmartRadar->getMode() == Mode::MANUAL){
-      detectionLed->switchOff();
-  }
+  
   if(SmartRadar->getMode() == Mode::AUTO){
     if(SmartRadar->isAlarmActive()){
       if(alarmLed->isOn()){
@@ -32,5 +32,7 @@ void BlinkTask::tick(){
     }else{
       alarmLed->switchOff();
     }
+  }else{
+    alarmLed->switchOff();
   }
 }

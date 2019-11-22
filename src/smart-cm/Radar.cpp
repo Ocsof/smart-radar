@@ -6,9 +6,9 @@
 #define BUTTONS_PIN 2
 #define BUTTONM_PIN 3
 #define BUTTONA_PIN 4
-#define POTENTIOMETER_PIN 15
-#define SONAR_TRIG_PIN 10
-#define SONAR_ECHO_PIN 11
+#define POTENTIOMETER_PIN A1
+#define SONAR_TRIG_PIN 8
+#define SONAR_ECHO_PIN 7
 #define PIR_PIN 12
 #define SERVO_MOTOR_PIN 9
 
@@ -36,7 +36,7 @@ Radar::Radar(){
   this->servoMotor = new PositionalServoMotorImpl(SERVO_MOTOR_PIN, this->numOfPositions);
   this->commandQueue = new Queue<Command>();
   this->lastMeasurement = 0;
-  this->currentMode = Mode::MANUAL;
+  this->currentMode = Mode::AUTO;
   this->currentSpeed = Speed::FAST;
 }
 
@@ -50,7 +50,7 @@ Led* Radar::getAlarmLed(){
 }
 
 Button* Radar::getButtonS(){
-    return this->buttonA;
+    return this->buttonS;
 }
 
 Button* Radar::getButtonM(){

@@ -18,12 +18,17 @@ void SerialWriteTask::tick(){
   }else{
     Serial.print(" ; Object detected at distance: ");
     Serial.print(lastMeasurement);
-    Serial.print(" m;\n");
+    Serial.print(" cm;\n");
   }
   if(SmartRadar->isAlarmActive()){
     Serial.print("on\n");
   }else{
     Serial.print("off\n");
   }
+    Serial.print("Mode: ");
+    Serial.print(static_cast<int>(SmartRadar->getMode()));
+    Serial.print(" ; Speed: ");
+    Serial.print(static_cast<int>(SmartRadar->getSpeed()));
+    Serial.print("\n");
   
   }

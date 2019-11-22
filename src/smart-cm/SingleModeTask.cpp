@@ -1,6 +1,6 @@
 #include "SingleModeTask.h"
 
-#define RESETTING_PERIOD 100
+#define RESETTING_PERIOD 50
 
 
 SingleModeTask::SingleModeTask(Radar* SmartRadar){
@@ -23,13 +23,14 @@ void SingleModeTask::tick(){     //primo taskmode schedulato
         this->servo->stepForwardTarget();
       }else{
         this->resetting = false;
+        Serial.println("------------RESET COMPLETATO---------------");
         SmartRadar->getSonar()->setEnabled(true);
       }
     }else{
       this->init(static_cast<int>(SmartRadar->getSpeed()));
       do{ 
       }while(SmartRadar->dequeueCommand() != Command::NO_COMMAND);
-      if(!this->servo->getCurrentPosition() == this->servo->getNumOfPositions()){
+      if(this->servo->getCurrentPosition() != this->servo->getNumOfPositions() - 1){
         this->servo->incrementTarget();
         this->servo->stepForwardTarget();
       }      //quando finisce dovrebbe andare in idle, TODO

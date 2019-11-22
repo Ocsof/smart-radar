@@ -13,8 +13,8 @@
 enum class Command {  MOVE_LEFT = 1, MOVE_RIGHT = 2, MODE_SINGLE = 11, MODE_MANUAL = 12,
                       MODE_AUTO = 13, SPEED_ULTRASLOW = 21, SPEED_SLOW = 22, 
                       SPEED_NORMAL = 23, SPEED_FAST = 24, NO_COMMAND = 0};
-enum class Speed { ULTRASLOW = 520, SLOW = 390, NORMAL = 260, FAST = 130 };
-enum class Mode { SINGLE, MANUAL, AUTO };
+enum class Speed { ULTRASLOW = 600, SLOW = 450, NORMAL = 300, FAST = 150 };
+enum class Mode { SINGLE = 10, MANUAL = 20, AUTO = 30 };
 
 class Radar {
 

@@ -30,7 +30,7 @@ void AutoModeTask::tick(){
     if(this->servo->getCurrentPosition() == 0){
       this->direction = true;
     }
-    if(this->servo->getCurrentPosition() == this->servo->getNumOfPositions()){
+    if(this->servo->getCurrentPosition() == this->servo->getNumOfPositions() - 1){
       this->direction = false;
     }
     if(this->direction){
