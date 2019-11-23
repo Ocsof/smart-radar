@@ -1,4 +1,5 @@
 #include "SingleModeTask.h"
+#include <avr/sleep.h>
 
 #define RESETTING_PERIOD 50
 
@@ -33,10 +34,19 @@ void SingleModeTask::tick(){     //primo taskmode schedulato
       if(this->servo->getCurrentPosition() != this->servo->getNumOfPositions() - 1){
         this->servo->incrementTarget();
         this->servo->stepForwardTarget();
-      }      //quando finisce dovrebbe andare in idle, TODO
+      }else{
+        attachInterrupt(digitalPinToInterrupt(2), wakeUp, RISING);
+        set_sleep_mode(SLEEP_MODE_PWR_DOWN);  
+        sleep_enable();
+        sleep_mode();  
+        detachInterrupt(2);
+        sleep_disable();
+      }
     }
   }else{
     this->resetting = true;
     SmartRadar->getSonar()->setEnabled(true);
   }
 }
+
+void SingleModeTask::wakeUp(){}

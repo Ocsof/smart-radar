@@ -27,5 +27,6 @@ void PotentiometerReadTask::tick(){
   }
   if(command != this->speed){
     SmartRadar->enqueueCommand(command);
+    this->speed = command;
   }
 }
