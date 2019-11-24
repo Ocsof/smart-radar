@@ -6,11 +6,12 @@
 
 
 class BlinkTask: public Task {
-  Led* alarmLed;
   Led* detectionLed;
+  Led* alarmLed;
+  Radar* SmartRadar;
 
 public:
-  BlinkTask();  
+  BlinkTask(Radar* SmartRadar);  
   void init(int period);  
   void tick();
 };

@@ -5,10 +5,11 @@
 #include "Radar.h"
 
 class ManualModeTask: public Task {
+  Radar* SmartRadar;
   PositionalServoMotor* servo;
 
 public:
-  ManualModeTask();  
+  ManualModeTask(Radar* SmartRadar);  
   void init(int period);  
   void tick();
 };

@@ -7,6 +7,5 @@ PirImpl::PirImpl(int pin){
 }
 
 bool PirImpl::detected(){
-    int detected = digitalRead(pin);
-    return detected == HIGH;
+    return digitalRead(this->pin) == HIGH;
 };

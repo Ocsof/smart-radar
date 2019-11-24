@@ -5,11 +5,12 @@
 #include "Radar.h"
 
 class SingleModeTask: public Task {
+  Radar* SmartRadar;
   PositionalServoMotor* servo;
-  bool resetting;
+  bool resetting; /*true = resetting, false = sweeping*/
 
 public:
-  SingleModeTask();  
+  SingleModeTask(Radar* SmartRadar);  
   void init(int period);  
   void tick();
 };

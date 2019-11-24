@@ -17,7 +17,7 @@ class SonarImpl: public Sonar {
          /* supponendo di eseguire il test in un ambiente a 20 °C */
         const float vs = 331.45 + 0.62*20; 
         float distance;
-        const int timeout = 5000; /* 5 millisecondi */
+        const int timeout = 20000; /* 5 millisecondi */
 };
 
 

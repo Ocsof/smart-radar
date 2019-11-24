@@ -2,13 +2,13 @@
 #include "Arduino.h"
 
 PositionalServoMotorImpl::PositionalServoMotorImpl(int pin, int numOfPositions){
+  this->on();
   this->pin = pin; 
   this->currentPosition = 0; 
   this->motor.write(this->convertPosition(0));
   this->target = 0;
-  this->numOfPositions = numOfPositions,
+  this->numOfPositions = numOfPositions;
   this->step = 180 / (this->numOfPositions - 1); // 180 / number of steps
-  this->on();
 } 
 
 void PositionalServoMotorImpl::on(){
@@ -30,22 +30,21 @@ void PositionalServoMotorImpl::incrementTarget(){
 }
 
 void PositionalServoMotorImpl::decrementTarget(){
-  if(this->currentPosition >= step) {
+  if(this->target >= step) {
      this->target -= step;
   }
 }
 
 void PositionalServoMotorImpl::stepForwardTarget(){
-  if(this->currentPosition == this->target){
-    return;
-  }
-  if(this->currentPosition > this->target){
-    this->currentPosition -= step;
-  }
-  else{
-    this->currentPosition += step;
-  }
-  this->motor.write(this->convertPosition(this->currentPosition));
+  if(this->currentPosition != this->target){
+    if(this->currentPosition > this->target){
+      this->currentPosition -= step;
+    }
+    else{
+      this->currentPosition += step;
+    }
+    this->motor.write(this->convertPosition(this->currentPosition));
+  } 
 }
 
 void PositionalServoMotorImpl::alignTarget(){

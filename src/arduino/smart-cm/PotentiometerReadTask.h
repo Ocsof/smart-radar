@@ -5,11 +5,13 @@
 #include "Radar.h"
 
 class PotentiometerReadTask: public Task {
-  
+
+  Radar* SmartRadar;
   Potentiometer* potentiometer;
+  Command lastCommand;
 
 public:
-  PotentiometerReadTask(Potentiometer* potentiometer);  
+  PotentiometerReadTask(Radar* SmartRadar);  
   void init(int period);  
   void tick();
 };

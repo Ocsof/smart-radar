@@ -7,8 +7,10 @@
 
 class SerialReadTask: public Task {
 
+Radar* SmartRadar;
+
 public:
-  SerialReadTask();  
+  SerialReadTask(Radar* SmartRadar);  
   void init(int period);  
   void tick();
 };

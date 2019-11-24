@@ -6,10 +6,11 @@
 
 class DistanceMeasurementTask: public Task {
 
+  Radar* SmartRadar;
   Sonar* sonar;
 
 public:
-  DistanceMeasurementTask(Sonar* sonar);  
+  DistanceMeasurementTask(Radar* SmartRadar);  
   void init(int period);  
   void tick();
 };

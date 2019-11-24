@@ -1,8 +1,9 @@
 #include "BlinkTask.h"
 
-BlinkTask::BlinkTask(){
-  this->alarmLed = SmartRadar.getAlarmLed();   
-  this->detectionLed = SmartRadar.getDetectionLed();
+BlinkTask::BlinkTask(Radar* SmartRadar){
+  this->SmartRadar = SmartRadar;
+  this->detectionLed = this->SmartRadar->getDetectionLed(); 
+  this->alarmLed = this->SmartRadar->getAlarmLed();  
 }
 
 
@@ -11,26 +12,25 @@ void BlinkTask::init(int period){
 }
 
 void BlinkTask::tick(){
-  if(SmartRadar.getMode() == Mode::SINGLE){
-    if(SmartRadar.getLastMeasurement() != 0){
-      detectionLed->switchOn();
+  /*Detection led is active only in SINGLE mode*/
+  if(SmartRadar->getMode() == Mode::SINGLE){
+    if(SmartRadar->getLastMeasurement() != 0){
+      this->detectionLed->switchOn();
     }else{
-      detectionLed->switchOff();
+      this->detectionLed->switchOff();
     }
+  }else{
+    detectionLed->switchOff();
   }
-  if(SmartRadar.getMode() == Mode::MANUAL){
-      detectionLed->switchOff();
+
+  if(SmartRadar->isAlarmActive()){
+    if(alarmLed->isOn()){
       alarmLed->switchOff();
-  }
-  if(SmartRadar.getMode() == Mode::AUTO){
-    if(SmartRadar.isAlarmActive()){
-      if(alarmLed->isOn()){
-        alarmLed->switchOff();
-      }else{
-        alarmLed->switchOn();
-      }
     }else{
-      alarmLed->switchOff();
+      alarmLed->switchOn();
     }
+  }else{
+    alarmLed->switchOff();
   }
 }
+
