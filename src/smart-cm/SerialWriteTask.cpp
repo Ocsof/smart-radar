@@ -25,10 +25,10 @@ void SerialWriteTask::tick(){
   }else{
     Serial.print("off\n");
   }
-    Serial.print("Mode: ");
-    Serial.print(static_cast<int>(SmartRadar->getMode()));
-    Serial.print(" ; Speed: ");
-    Serial.print(static_cast<int>(SmartRadar->getSpeed()));
-    Serial.print("\n");
+//    Serial.print("Mode: ");
+//    Serial.print(static_cast<int>(SmartRadar->getMode()));
+//    Serial.print(" ; Speed: ");
+//    Serial.print(static_cast<int>(SmartRadar->getSpeed()));
+//    Serial.print("\n");
   
   }

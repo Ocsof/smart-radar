@@ -1,7 +1,7 @@
 package application;
 
 public class SmartConsole {
-	private final CommChannel channel = new SerialCommChannel("/dev/cu.usbmodem1421",9600);
+	private final CommChannel channel = new SerialCommChannel("COM10",9600);
 	SampleController controller;
 	
 	public SmartConsole(SampleController contr) throws InterruptedException {
@@ -26,7 +26,6 @@ public class SmartConsole {
 								} else {
 									controller.setText("Received:  " + msg);	
 								}
-								Thread.sleep(100);
 							}
 						}
 					} catch (InterruptedException e) {

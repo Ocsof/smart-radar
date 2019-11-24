@@ -49,4 +49,7 @@ void AutoModeTask::tick(){
       this->servo->stepForwardTarget();
     }    
   }
+  else{
+    SmartRadar->setAlarm(false);
+  }
 }

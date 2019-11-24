@@ -14,55 +14,59 @@ public class SampleController {
 	private SmartConsole console;
 	@FXML
 	private TextArea myConsole;
+	private boolean alarm;
+	private int counter;
 	
 	public SampleController() throws InterruptedException {
 		console = new SmartConsole(this);
+		this.alarm = false;
+		this.counter = 0;
 	}
 	
 	public void singleClicked() {
 		console.getChannel().sendMsg(MessageType.SINGLE.toString());
-		myConsole.appendText("\n" + "Mode changed to: SINGLE");
+		this.setText("Mode changed to: SINGLE");
 	}
 	
 	public void manualClicked() {
 		console.getChannel().sendMsg(MessageType.MANUAL.toString());
-		myConsole.appendText("\n" + "Mode changed to: MANUAL");
+		this.setText("Mode changed to: MANUAL");
 	}
 	
 	public void autoClicked() {
 		console.getChannel().sendMsg(MessageType.AUTO.toString());
-		myConsole.appendText("\n" + "Mode changed to: AUTO");
+		this.setText("Mode changed to: AUTO");
 	}
 
 	public void ultraslowClicked() {
 		console.getChannel().sendMsg(MessageType.ULTRASLOW.toString());
-		myConsole.appendText("\n" + "Speed set to: ULTRASLOW");
+		this.setText("Speed set to: ULTRASLOW");
 	}
 
 	public void slowClicked() {
 		console.getChannel().sendMsg(MessageType.SLOW.toString());
-		myConsole.appendText("\n" + "Speed set to: SLOW");
+		this.setText("Speed set to: SLOW");
 	}
 
 	public void normalClicked() {
 		console.getChannel().sendMsg(MessageType.NORMAL.toString());
-		myConsole.appendText("\n" + "Speed set to: NORMAL");
+		this.setText("Speed set to: NORMAL");
 	}
 	
 	public void fastClicked() {
 		console.getChannel().sendMsg(MessageType.FAST.toString());
-		myConsole.appendText("\n" + "Speed set to: FAST");
+		this.setText("Speed set to: FAST");
 	}
 	
 	public void handleKeyPressed(KeyEvent ke){
 		switch(ke.getCode()) {		
 			case LEFT:
 				console.getChannel().sendMsg(MessageType.LEFT.toString());
-				myConsole.appendText("\n" + "Rotating Sonar to LEFT");
+				this.setText("Rotating Sonar to LEFT");
 				break;
 			case RIGHT:
 				console.getChannel().sendMsg(MessageType.RIGHT.toString());
-				myConsole.appendText("\n" + "Rotating Sonar to RIGHT");
+				this.setText("Rotating Sonar to RIGHT");
 				break;
 			default:
 			break;
@@ -70,17 +74,27 @@ public class SampleController {
 	}
 	
 	public void setAlarm(boolean isOn) {
-//		if(isOn) {
-//			myConsole.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
-//			myConsole.appendText("\n" + "---------ALLARME--------");
-//		} 
-//		if(!isOn) {
-//			myConsole.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-//			myConsole.appendText("\n" + "---------fine allarme :) --------");
-//		}
+		if(isOn && isOn != this.alarm) {
+			myConsole.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+			this.setText("---------ALLARME--------");
+			this.alarm = isOn;
+		} 
+		if(!isOn && isOn != this.alarm) {
+			myConsole.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+			this.setText("---------fine allarme :) --------");
+			this.alarm = isOn;
+		}
 	}
 	
 	public void setText(String msg) {
-		myConsole.appendText("\n" + msg);
+		if(this.counter == 300) {
+			myConsole.setText(msg);
+			this.counter = 0;
+		}else {
+			myConsole.appendText("\n" + msg);
+			this.counter++;
+		}
+		
+		
 	}
 }

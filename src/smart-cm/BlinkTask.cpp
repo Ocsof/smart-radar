@@ -23,18 +23,14 @@ void BlinkTask::tick(){
     detectionLed->switchOff();
   }
 
-  /*Alarm led is active only in SINGLE mode*/
-  if(SmartRadar->getMode() == Mode::AUTO){
-    if(SmartRadar->isAlarmActive()){
-      if(alarmLed->isOn()){
-        alarmLed->switchOff();
-      }else{
-        alarmLed->switchOn();
-      }
-    }else{
+  if(SmartRadar->isAlarmActive()){
+    if(alarmLed->isOn()){
       alarmLed->switchOff();
+    }else{
+      alarmLed->switchOn();
     }
   }else{
     alarmLed->switchOff();
   }
 }
+
