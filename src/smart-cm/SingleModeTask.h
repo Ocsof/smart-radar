@@ -7,7 +7,7 @@
 class SingleModeTask: public Task {
   Radar* SmartRadar;
   PositionalServoMotor* servo;
-  bool resetting;
+  bool resetting; /*true = resetting, false = sweeping*/
 
 public:
   SingleModeTask(Radar* SmartRadar);  

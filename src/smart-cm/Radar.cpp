@@ -3,13 +3,13 @@
 /****** dare i numeri dei piiiiiiin ***/
 #define DETECTION_LED_PIN 6
 #define ALARM_LED_PIN 5
-#define BUTTONS_PIN 2
+#define BUTTONS_PIN 12
 #define BUTTONM_PIN 3
 #define BUTTONA_PIN 4
 #define POTENTIOMETER_PIN A1
 #define SONAR_TRIG_PIN 8
 #define SONAR_ECHO_PIN 7
-#define PIR_PIN 12
+#define PIR_PIN 2
 #define SERVO_MOTOR_PIN 9
 
 
@@ -32,11 +32,11 @@ Radar::Radar(){
   this->buttonA = new ButtonImpl(BUTTONA_PIN);
   this->potentiometer = new PotentiometerImpl(POTENTIOMETER_PIN);
   this->sonar = new SonarImpl(SONAR_TRIG_PIN, SONAR_ECHO_PIN);
-  //this->pir = new PirImpl(PIR_PIN);
+  this->pir = new PirImpl(PIR_PIN);
   this->servoMotor = new PositionalServoMotorImpl(SERVO_MOTOR_PIN, this->numOfPositions);
   this->commandQueue = new Queue<Command>();
   this->lastMeasurement = 0;
-  this->currentMode = Mode::AUTO;
+  this->currentMode = Mode::MANUAL;
   this->currentSpeed = Speed::FAST;
 }
 

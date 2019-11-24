@@ -10,6 +10,7 @@ void DistanceMeasurementTask::init(int period){
 }
 
 void DistanceMeasurementTask::tick(){
+  /*Adjust the period of this task according to selected speed*/
   this->init(static_cast<int>(SmartRadar->getSpeed()));
   if(this->sonar->isEnabled()){
     SmartRadar->addMeasurement(this->sonar->getDistance());

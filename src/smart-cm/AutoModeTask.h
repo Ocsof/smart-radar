@@ -10,7 +10,7 @@
 class AutoModeTask: public Task {
   PositionalServoMotor* servo;
   Radar* SmartRadar;
-  bool direction;
+  bool direction; /*true = right, false = left*/
   bool* nearObjects;
 
 public:

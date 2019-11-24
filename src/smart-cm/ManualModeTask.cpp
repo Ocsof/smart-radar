@@ -12,7 +12,9 @@ void ManualModeTask::init(int period){
 
 void ManualModeTask::tick(){
   if(SmartRadar->getMode() == Mode::MANUAL){
+    /*Adjust the period of this task according to selected speed*/
     this->init(static_cast<int>(SmartRadar->getSpeed()));
+    /*Take actions according to commands received*/
     do{
         Command command = SmartRadar->dequeueCommand();
         if(command == Command::MOVE_LEFT){

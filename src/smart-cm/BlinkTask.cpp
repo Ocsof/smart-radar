@@ -12,6 +12,7 @@ void BlinkTask::init(int period){
 }
 
 void BlinkTask::tick(){
+  /*Detection led is active only in SINGLE mode*/
   if(SmartRadar->getMode() == Mode::SINGLE){
     if(SmartRadar->getLastMeasurement() != 0){
       this->detectionLed->switchOn();
@@ -21,7 +22,8 @@ void BlinkTask::tick(){
   }else{
     detectionLed->switchOff();
   }
-  
+
+  /*Alarm led is active only in SINGLE mode*/
   if(SmartRadar->getMode() == Mode::AUTO){
     if(SmartRadar->isAlarmActive()){
       if(alarmLed->isOn()){
